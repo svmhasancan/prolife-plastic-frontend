@@ -1,0 +1,29 @@
+// :root {
+//     --color-bg: #1e1e2f;
+//     --color-bg-secondary: #2c2c3e;
+//     --color-accent: #4ea8de;
+//     --color-text: #f1f1f1;
+//     --color-muted: #9a9a9a;
+  
+//     --border-radius: 12px;
+//     --transition: 0.3s ease;
+//   }
+
+// src/assets/styles/_variables.scss
+
+:root {
+  --color-bg: #1e1e1e;
+  --color-bg-secondary: #2c2c2c;
+  --color-text: #f1f1f1;
+  --color-accent: #ff9800;
+
+  --transition: 0.3s ease;
+  --border-radius: 8px;
+}
+
+$secondary-color: #2c2c2c;
+$text-color: #f1f1f1;
+$accent-color: #ff9800;
+$transition: 0.3s ease;
+$border-radius: 8px;
+

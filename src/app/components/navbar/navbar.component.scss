@@ -1,0 +1,123 @@
+@use 'variables' as *;
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $secondary-color;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $accent-color;
+  }
+
+  .search-input {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: $border-radius;
+    width: 300px;
+    max-width: 100%;
+    background-color: #444;
+    color: $text-color;
+
+    &:focus {
+      outline: none;
+      background-color: #555;
+    }
+  }
+
+  .cart-btn {
+    position: relative;
+    background: none;
+    border: none;
+    color: $text-color;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: $transition;
+
+    &:hover {
+      color: $accent-color;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -10px;
+      background-color: $accent-color;
+      color: black;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.8rem;
+    }
+
+    .cart-dropdown {
+      position: absolute;
+      right: 0;
+      top: 40px;
+      background-color: $secondary-color;
+      border: 1px solid #444;
+      border-radius: $border-radius;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      width: 250px;
+      z-index: 100;
+      padding: 1rem;
+
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        color: $text-color;
+      }
+
+      .cart-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+
+        button {
+          padding: 0.5rem 1rem;
+          border: none;
+          border-radius: $border-radius;
+          cursor: pointer;
+          transition: $transition;
+
+          &.btn-view {
+            background-color: $accent-color;
+            color: black;
+          }
+
+          &.btn-checkout {
+            background-color: #333;
+            color: $text-color;
+
+            &:hover {
+              background-color: $accent-color;
+              color: black;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .navbar-center {
+      width: 100%;
+      margin: 0.5rem 0;
+
+      .search-input {
+        width: 100%;
+      }
+    }
+
+    .navbar-right {
+      align-self: flex-end;
+    }
+  }
+}

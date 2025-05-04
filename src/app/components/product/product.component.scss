@@ -1,0 +1,66 @@
+.product-card {
+    background-color: #2c2c2c;
+    color: #f1f1f1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;  /* Kartlar arasına boşluk eklemek için */
+    
+    &:hover {
+      transform: scale(1.03);
+    }
+  
+    img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+  
+    .product-info {
+      padding: 1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;  /* Ürün bilgileri kısmının kartı tam doldurmasını sağlıyor */
+      
+      h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.1rem;
+      }
+  
+      .price {
+        color: #ff9800;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+  
+      button {
+        background-color: #ff9800;
+        color: #1e1e1e;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%; /* Buton genişliği kartın genişliğiyle aynı olacak */
+        
+        i {
+          margin-right: 0.5rem;
+        }
+  
+        &:hover {
+          background-color: #ffa733;
+        }
+      }
+    }
+  }
+  

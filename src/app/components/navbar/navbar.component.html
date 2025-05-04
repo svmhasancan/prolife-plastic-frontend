@@ -1,0 +1,23 @@
+<div class="navbar">
+  <div class="logo">Prolife</div>
+
+  <div class="navbar-center">
+    <input class="search-input" type="text" placeholder="Ürün ara..." />
+  </div>
+
+  <div class="cart-btn" (click)="toggleCartDropdown()">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-count">2</span>
+
+    <div class="cart-dropdown" *ngIf="isCartOpen">
+      <div class="cart-item" *ngFor="let item of cartItems">
+        <span>{{ item.name }}</span>
+        <span>{{ item.price | currency }}</span>
+      </div>
+      <div class="cart-actions">
+        <button class="btn-view">Sepete Git</button>
+        <button class="btn-checkout">Satın Al</button>
+      </div>
+    </div>
+  </div>
+</div>
