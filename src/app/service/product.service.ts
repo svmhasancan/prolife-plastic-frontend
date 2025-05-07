@@ -19,4 +19,28 @@ export class ProductService extends BaseService<Product> {
       categoryId;
     return this.httpClient.get<ListResponseModel<Product>>(newUrl);
   }
+
+  getByBrandId(brandId: string): Observable<ListResponseModel<Product>> {
+    let newUrl =
+      'https://localhost:44397/api/Products/getbybrandid?brandId=' + brandId;
+    return this.httpClient.get<ListResponseModel<Product>>(newUrl);
+  }
+
+  add(product: Product): Observable<ListResponseModel<Product>> {
+    let url = 'https://localhost:44397/api/Products/add';
+
+    return this.httpClient.post<ListResponseModel<Product>>(url, product);
+  }
+
+  update(product: Product): Observable<ListResponseModel<Product>> {
+    let url = 'https://localhost:44397/api/Products/update';
+    return this.httpClient.put<ListResponseModel<Product>>(url, product);
+  }
+
+  delete(product: Product): Observable<ListResponseModel<Product>> {
+    let url = 'https://localhost:44397/api/Products/delete';
+    return this.httpClient.delete<ListResponseModel<Product>>(url, {
+      body: product,
+    });
+  }
 }

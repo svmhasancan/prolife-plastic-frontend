@@ -1,0 +1,60 @@
+<div class="product-management">
+    <h2>Ürün Yönetimi</h2>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+        <div class="form-group">
+            <input formControlName="name" type="text" placeholder="Ürün Adı" />
+        </div>
+
+        <div class="form-group">
+            <select formControlName="categoryId">
+                <option value="">Kategori Seçin</option>
+                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <select formControlName="brandId">
+                <option value="">Marka Seçin</option>
+                <option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input formControlName="unitPrice" type="number" placeholder="Birim Fiyat" />
+        </div>
+
+        <div class="form-group">
+            <textarea formControlName="description" rows="3" placeholder="Açıklama"></textarea>
+        </div>
+
+        <div class="form-group checkbox-group">
+            <label>
+                <input type="checkbox" formControlName="isInStock" />
+                Stokta Var
+            </label>
+        </div>
+
+        <button type="submit">
+            {{ selectedProduct ? 'Güncelle' : 'Ekle' }}
+        </button>
+    </form>
+
+    <div class="product-list">
+        <div class="product-card" *ngFor="let product of products">
+            <h3>{{ product.name }}</h3>
+            <p>Kategori: {{getCategoryName(product)}}</p>
+            <p>Marka: {{getBrandName(product)}}</p>
+            <p>Fiyat: {{ product.unitPrice | currency:'TRY' }}</p>
+            <p *ngIf="product.isInStock; else outOfStock">Stokta Var</p>
+            <ng-template #outOfStock>
+                <p>Stokta Yok</p>
+            </ng-template>
+
+            <div class="actions">
+                <button (click)="editProduct(product)">Güncelle</button>
+                <button class="danger" (click)="deleteProduct(product)">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>

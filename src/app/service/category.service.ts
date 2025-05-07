@@ -12,4 +12,9 @@ export class CategoryService extends BaseService<Category> {
   constructor(httpClient: HttpClient) {
     super(httpClient, 'https://localhost:44397/api/Categories');
   }
+
+  getByName(name: string): Observable<ListResponseModel<Category>> {
+    let url = 'https://localhost:44397/api/Categories/getbyname?name=' + name;
+    return this.httpClient.get<ListResponseModel<Category>>(url);
+  }
 }
