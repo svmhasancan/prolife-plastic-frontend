@@ -10,6 +10,13 @@ import { BaseService } from './base.service';
 })
 export class ProductService extends BaseService<Product> {
   constructor(httpClient: HttpClient) {
-    super(httpClient, 'https://localhost:44397/api/Products/getall');
+    super(httpClient, 'https://localhost:44397/api/Products');
+  }
+
+  getByCategoryId(categoryId: string): Observable<ListResponseModel<Product>> {
+    let newUrl =
+      'https://localhost:44397/api/Products/getbycategoryid?categoryId=' +
+      categoryId;
+    return this.httpClient.get<ListResponseModel<Product>>(newUrl);
   }
 }

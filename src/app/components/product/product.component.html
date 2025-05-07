@@ -1,10 +1,16 @@
-<div *ngFor="let product of products" class="product-card">
-    <img src="https://picsum.photos/300/300" alt="{{ product.name }}" />
-    <div class="product-info">
-        <h3>{{ product.name }}</h3>
-        <p class="price">{{ product.unitPrice | currency: 'TRY' }}</p>
-        <button>
-            <i class="fas fa-cart-plus"></i> Sepete Ekle
-        </button>
+<div class="product-search">
+    <input class="search-input" type="text" placeholder="Ürün ara..." [(ngModel)]="searchQuery" />
+</div>
+
+<div class="product-list">
+    <div *ngFor="let product of filteredProducts()" class="product-card">
+        <img src="https://picsum.photos/300/300" alt="{{ product.name }}" />
+        <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="price">{{ product.unitPrice | currency: 'TRY' }}</p>
+            <button (click)="addToCart(product)">
+                <i class="fas fa-cart-plus"></i> Sepete Ekle
+            </button>
+        </div>
     </div>
 </div>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/service/product.service';
 
+import { ActivatedRoute } from '@angular/router';
+import { CartService } from 'src/app/service/cart.service';
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -9,15 +12,46 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class ProductComponent implements OnInit {
   products: Product[];
-  constructor(private productService: ProductService) {}
+  searchQuery: string = '';
+
+  constructor(
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
-    this.getProducts();
+    this.activatedRoute.paramMap.subscribe((params) => {
+      const categoryId = params.get('categoryId');
+
+      if (categoryId) {
+        this.getProductsByCategoryId(categoryId.toString());
+      } else {
+        this.getProducts();
+      }
+    });
   }
 
   getProducts(): void {
     this.productService.getAll().subscribe((response) => {
       this.products = response.data;
     });
+  }
+
+  getProductsByCategoryId(categoryId: string): void {
+    this.productService.getByCategoryId(categoryId).subscribe((response) => {
+      this.products = response.data;
+    });
+  }
+
+  filteredProducts() {
+    if (!this.searchQuery) return this.products;
+    return this.products.filter((product) =>
+      product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
   }
 }

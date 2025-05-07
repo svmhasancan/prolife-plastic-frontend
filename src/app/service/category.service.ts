@@ -10,6 +10,6 @@ import { BaseService } from './base.service';
 })
 export class CategoryService extends BaseService<Category> {
   constructor(httpClient: HttpClient) {
-    super(httpClient, 'https://localhost:44397/api/Categories/getall');
+    super(httpClient, 'https://localhost:44397/api/Categories');
   }
 }

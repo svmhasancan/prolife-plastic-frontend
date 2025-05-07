@@ -1,0 +1,52 @@
+<div class="cart-container">
+    <div class="cart-left">
+        <h2>Sepetiniz</h2>
+
+        <div *ngFor="let cartItem of cartItems" class="cart-item">
+            <img src="https://picsum.photos/300/300" alt="{{cartItem.product.name}}">
+            <div class="item-details">
+                <h4>{{cartItem.product.name}}</h4>
+                <p>Adet : {{cartItem.quantity}}</p>
+                <p>{{cartItem.product.unitPrice * cartItem.quantity}} </p>
+            </div>
+        </div>
+
+        <!-- <div *ngIf="cartItems.length >0">
+            <span>Toplam Tutar : {{totalPrice.toString() |currency }}</span>
+        </div> -->
+
+        <div class="payment-form">
+            <h3>Kartla Ödeme</h3>
+            <form (ngSubmit)="payWithCard()">
+                <input type="text" placeholder="Kart Sahibi Adı" required>
+                <input type="text" placeholder="Kart Numarası" required>
+                <input type="text" placeholder="SKT (AA/YY)" required>
+                <input type="text" placeholder="CVV" required>
+                <button type="submit">Ödemeyi Tamamla</button>
+            </form>
+        </div>
+
+        <ng-template #contactInstead>
+            <div class="custom-order-message">
+                <p><strong>1000₺ üzeri siparişlerde kartla ödeme yapılamamaktadır.</strong></p>
+                <p>Lütfen sipariş formunu doldurun. En kısa sürede sizinle iletişime geçeceğiz.</p>
+                <form (ngSubmit)="submitCustomOrderForm()">
+                    <input type="text" placeholder="Ad Soyad" required>
+                    <input type="email" placeholder="E-Posta" required>
+                    <textarea placeholder="Sipariş Detayları" rows="3" required></textarea>
+                    <button type="submit">Formu Gönder</button>
+                </form>
+            </div>
+        </ng-template>
+    </div>
+
+    <div class="cart-right">
+        <h3>Teslimat Adresi</h3>
+        <form (ngSubmit)="submitAddress()">
+            <input type="text" placeholder="Ad Soyad" required>
+            <input type="tel" placeholder="Telefon" required>
+            <textarea placeholder="Açık Adres" rows="4" required></textarea>
+            <button type="submit">Sipariş Talebi Oluştur</button>
+        </form>
+    </div>
+</div>

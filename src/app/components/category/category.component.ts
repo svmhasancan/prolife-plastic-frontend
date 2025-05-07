@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/service/category.service';
 
@@ -9,7 +10,11 @@ import { CategoryService } from 'src/app/service/category.service';
 })
 export class CategoryComponent implements OnInit {
   categories: Category[];
-  constructor(private categoryService: CategoryService) {}
+  currentCategory: Category;
+  constructor(
+    private categoryService: CategoryService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getCategories();
@@ -19,5 +24,14 @@ export class CategoryComponent implements OnInit {
     this.categoryService.getAll().subscribe((response) => {
       this.categories = response.data;
     });
+  }
+
+  setCurrentCategory(category: Category) {
+    this.currentCategory = category;
+    this.routeToCurrentCategory();
+  }
+
+  routeToCurrentCategory() {
+    this.router.navigate(['categories', this.currentCategory.id.toString()]);
   }
 }
