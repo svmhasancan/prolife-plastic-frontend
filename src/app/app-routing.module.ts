@@ -7,6 +7,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ProductCrudComponent } from './components/product-crud/product-crud.component';
+import { RoleGuard } from './guards/role.guard';
+import { UnauthorizedComponent } from './components/pages/unauthorized/unauthorized.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -16,7 +18,12 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'product-manager', component: ProductCrudComponent },
+  {
+    path: 'product-manager',
+    component: ProductCrudComponent,
+    canActivate: [RoleGuard],
+  },
+  { path: 'unauthorized', component: UnauthorizedComponent },
 ];
 
 @NgModule({

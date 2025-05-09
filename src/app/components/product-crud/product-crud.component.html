@@ -43,8 +43,8 @@
     <div class="product-list">
         <div class="product-card" *ngFor="let product of products">
             <h3>{{ product.name }}</h3>
-            <p>Kategori: {{getCategoryName(product)}}</p>
-            <p>Marka: {{getBrandName(product)}}</p>
+            <p>Kategori: Kategori Adı</p>
+            <p>Marka: Marka Adı</p>
             <p>Fiyat: {{ product.unitPrice | currency:'TRY' }}</p>
             <p *ngIf="product.isInStock; else outOfStock">Stokta Var</p>
             <ng-template #outOfStock>

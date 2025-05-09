@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Notyf } from 'notyf';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,20 +9,40 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
+  loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  private notyf = new Notyf();
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.createLoginForm();
+  }
+
+  createLoginForm() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', Validators.required],
     });
   }
 
   onSubmit() {
-    if (this.loginForm.invalid) return;
-    console.log('Login data:', this.loginForm.value);
-    // backend servise bağlayacaksın
+    if (this.loginForm.valid) {
+      let loginModel = Object.assign({}, this.loginForm.value);
+      this.authService.login(loginModel).subscribe(
+        (response) => {
+          localStorage.setItem('token', response.data.token);
+          this.notyf.success('Giriş Yapıldı');
+        },
+        (responseError) => {
+          this.notyf.error(responseError.error);
+        }
+      );
+    } else {
+      this.notyf.error('Tüm Alanları Doldurunuz');
+    }
   }
 }

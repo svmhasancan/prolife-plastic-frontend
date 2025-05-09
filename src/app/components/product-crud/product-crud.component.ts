@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Notyf } from 'notyf';
+
 import { Brand } from 'src/app/models/brand';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
+
 import { BrandService } from 'src/app/service/brand.service';
 import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
+
 @Component({
   selector: 'app-product-crud',
   templateUrl: './product-crud.component.html',
@@ -17,6 +21,8 @@ export class ProductCrudComponent implements OnInit {
   categories: Category[];
   brands: Brand[];
   selectedProduct: Product;
+
+  private notyf = new Notyf();
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
@@ -43,28 +49,10 @@ export class ProductCrudComponent implements OnInit {
     });
   }
 
-  getCategoryName(product: Product): string {
-    let deneme: Product[] = [];
-    let categoryName = 'p';
-    this.productService
-      .getByCategoryId(product.categoryId.toString())
-      .subscribe((response) => {
-        deneme = response.data;
-        console.log(deneme);
-      });
-    return categoryName;
-  }
-
   getBrands() {
     this.brandService.getAll().subscribe((response) => {
       this.brands = response.data;
     });
-  }
-
-  getBrandName(product: Product): string {
-    let brandName = '';
-
-    return brandName;
   }
 
   createProductForm() {
@@ -102,11 +90,12 @@ export class ProductCrudComponent implements OnInit {
     if (this.productForm.valid) {
       let productModel = Object.assign({}, this.productForm.value);
       this.productService.add(productModel).subscribe((response) => {
-        console.log(response);
-        console.log('Ürün Eklendi');
+        this.notyf.success('Ürün Eklendi!');
+        this.clearForm();
+        this.getProducts();
       });
     } else {
-      console.log('İnputları Kontrol Et');
+      this.notyf.error('Gerekli Tüm Alanları Doldurunuz!');
     }
   }
 
@@ -121,12 +110,13 @@ export class ProductCrudComponent implements OnInit {
         this.clearForm();
       });
     } else {
-      console.log('Inputları Kontrol Et');
+      this.notyf.error('Gerekli Tüm Alanları Doldurunuz');
     }
   }
 
   deleteProduct(product: Product) {
     this.productService.delete(product).subscribe((response) => {
+      this.notyf.success('Ürün Silindi');
       this.getProducts();
     });
   }
