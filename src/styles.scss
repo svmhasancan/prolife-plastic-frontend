@@ -1,3 +1,11 @@
 @import './assets/styles/auth-form';
 @import './assets/styles/variables';
 @import './assets/styles/reset';
+@import '~notyf/notyf.min.css';
+
+.notyf__toast--success {
+  background-color: #4caf50;
+}
+.notyf__toast--error {
+  background-color: #f44336;
+}

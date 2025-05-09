@@ -1,19 +1,31 @@
 <div class="navbar">
-  <div class="logo">Prolife</div>
-  <div class="cart-btn" (click)="toggleCartDropdown()">
-    <i class="fas fa-shopping-cart"></i>
-    <span *ngIf="cartItems.length>0" class="cart-count">{{cartItems.length}}</span>
+  <div class="navbar-left">
+    <div class="logo">Prolife</div>
+  </div>
 
-    <div class="cart-dropdown" *ngIf="isCartOpen">
-      <div class="cart-item" *ngFor="let item of cartItems">
-        <span>{{ item.product.name}}</span>
-        <span>{{ item.quantity }}</span>
-        <!-- <span>{{ item.price | currency }}</span> -->
-        <button class="btn-remove-item" (click)="removeItem(item)">Sil</button>
-      </div>
-      <div class="cart-actions">
-        <button class="btn-clear-cart" (click)="clearCart()">Sepeti Temizle</button>
-        <button class="btn-checkout" (click)="routeToCart()">Sepete Git</button>
+  <div class="navbar-center">
+    <a routerLink="/about" class="nav-link">Hakkımızda</a>
+    <a routerLink="/contact" class="nav-link">İletişim</a>
+  </div>
+
+  <div class="navbar-right">
+    <a routerLink="/register" class="auth-btn">Üye Ol</a>
+    <a routerLink="/login" class="auth-btn">Giriş Yap</a>
+
+    <div class="cart-btn" (click)="toggleCartDropdown()">
+      <i class="fas fa-shopping-cart"></i>
+      <span *ngIf="cartItems.length > 0" class="cart-count">{{ cartItems.length }}</span>
+
+      <div class="cart-dropdown" *ngIf="isCartOpen">
+        <div class="cart-item" *ngFor="let item of cartItems">
+          <span>{{ item.product.name }}</span>
+          <span>{{ item.quantity }}</span>
+          <button class="btn-remove-item" (click)="removeItem(item)">Sil</button>
+        </div>
+        <div class="cart-actions">
+          <button class="btn-clear-cart" (click)="clearCart()">Sepeti Temizle</button>
+          <button class="btn-checkout" (click)="routeToCart()">Sepete Git</button>
+        </div>
       </div>
     </div>
   </div>

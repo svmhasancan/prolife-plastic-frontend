@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/service/product.service';
-
-import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/service/cart.service';
+
+import { Notyf } from 'notyf';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -13,6 +14,8 @@ import { CartService } from 'src/app/service/cart.service';
 export class ProductComponent implements OnInit {
   products: Product[];
   searchQuery: string = '';
+
+  private notyf = new Notyf();
 
   constructor(
     private productService: ProductService,
@@ -53,5 +56,6 @@ export class ProductComponent implements OnInit {
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
+    this.notyf.success('Ürün Sepete Eklendi');
   }
 }

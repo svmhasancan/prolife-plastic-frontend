@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Notyf } from 'notyf';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,29 +11,36 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.registerForm = this.fb.group({
+  private notyf = new Notyf();
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {}
+
+  createRegitserForm() {
+    this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.createRegitserForm();
+  }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      if (
-        this.registerForm.value.password !==
-        this.registerForm.value.confirmPassword
-      ) {
-        alert('Şifreler uyuşmuyor!');
-        return;
-      }
-
-      console.log(this.registerForm.value); // Kayıt isteği buradan gönderilecek
+      let registerModel = Object.assign({}, this.registerForm.value);
+      this.authService.register(registerModel).subscribe((response) => {
+        console.log(response);
+        localStorage.setItem('token', response.data.token);
+        this.notyf.success('Kayıt OLma İşlemi Başarılı!');
+      });
+    } else {
+      this.notyf.error('Lütfen Gerekli Bilgileri Doldurunuz');
     }
   }
 }
