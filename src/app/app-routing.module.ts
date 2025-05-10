@@ -9,8 +9,14 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ProductCrudComponent } from './components/product-crud/product-crud.component';
 import { RoleGuard } from './guards/role.guard';
 import { UnauthorizedComponent } from './components/pages/unauthorized/unauthorized.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 const routes: Routes = [
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+  },
   { path: '', pathMatch: 'full', component: HomeComponent },
   { path: 'categories/:categoryId', component: HomeComponent },
   { path: 'cart', component: CartComponent },
@@ -24,6 +30,7 @@ const routes: Routes = [
     canActivate: [RoleGuard],
   },
   { path: 'unauthorized', component: UnauthorizedComponent },
+  { path: 'products', component: ProductCardComponent },
 ];
 
 @NgModule({

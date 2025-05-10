@@ -11,6 +11,19 @@ import { CartService } from 'src/app/service/cart.service';
 export class NavbarComponent implements OnInit {
   isCartOpen = false;
 
+  menuActive = false;
+  dropdownOpen = false;
+  isLoggedIn = true; // Bunu giriş durumuna göre ayarlarsın
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks?.classList.toggle('active');
+  }
+
   cartItems: CartItem[] = [];
 
   constructor(private cartService: CartService, private route: Router) {}

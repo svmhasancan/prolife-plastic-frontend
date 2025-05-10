@@ -18,6 +18,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ProductCrudComponent } from './components/product-crud/product-crud.component';
 import { UnauthorizedComponent } from './components/pages/unauthorized/unauthorized.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { UnauthorizedComponent } from './components/pages/unauthorized/unauthori
     ResetPasswordComponent,
     ProductCrudComponent,
     UnauthorizedComponent,
+    ProductCardComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

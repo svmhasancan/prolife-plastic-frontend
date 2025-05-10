@@ -1,39 +1,8 @@
-.footer-container {
-    background-color: #2c2c2c;
-    color: #f1f1f1;
-    padding: 1.5rem 2rem;
-    text-align: center;
-    border-top: 1px solid #444;
-    margin-top: auto;
-  
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-  
-      p {
-        margin: 0;
-        font-size: 0.9rem;
-      }
-  
-      .social-icons {
-        display: flex;
-        gap: 1rem;
-  
-        a {
-          color: #f1f1f1;
-          transition: color 0.3s ease;
-  
-          &:hover {
-            color: #ff9800;
-          }
-  
-          i {
-            font-size: 1.2rem;
-          }
-        }
-      }
-    }
-  }
-  
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}

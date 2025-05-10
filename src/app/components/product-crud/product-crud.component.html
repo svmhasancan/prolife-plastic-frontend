@@ -1,59 +1,65 @@
-<div class="product-management">
-    <h2>Ürün Yönetimi</h2>
+<div class="product-form">
+    <h2>Ürün Ekle / Güncelle</h2>
 
-    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <input formControlName="name" type="text" placeholder="Ürün Adı" />
+            <label>Ürün Adı</label>
+            <input formControlName="name" type="text" placeholder="Ürün adı girin" />
         </div>
 
         <div class="form-group">
+            <label>Kategori</label>
             <select formControlName="categoryId">
-                <option value="">Kategori Seçin</option>
-                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                <option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.name }}
+                </option>
             </select>
         </div>
 
         <div class="form-group">
+            <label>Marka</label>
             <select formControlName="brandId">
-                <option value="">Marka Seçin</option>
-                <option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</option>
+                <option *ngFor="let brand of brands" [value]="brand.id">
+                    {{ brand.name }}
+                </option>
             </select>
         </div>
 
         <div class="form-group">
-            <input formControlName="unitPrice" type="number" placeholder="Birim Fiyat" />
+            <label>Fiyat</label>
+            <input formControlName="unitPrice" type="number" placeholder="₺" />
         </div>
 
         <div class="form-group">
-            <textarea formControlName="description" rows="3" placeholder="Açıklama"></textarea>
+            <label>Stokta mı?</label>
+            <input type="checkbox" formControlName="isInStock" />
         </div>
 
-        <div class="form-group checkbox-group">
-            <label>
-                <input type="checkbox" formControlName="isInStock" />
-                Stokta Var
-            </label>
+        <div class="form-group">
+            <label>Açıklama</label>
+            <textarea formControlName="description" rows="4" placeholder="Ürün açıklaması yazın"></textarea>
         </div>
 
-        <button type="submit">
-            {{ selectedProduct ? 'Güncelle' : 'Ekle' }}
-        </button>
+        <button type="submit" [disabled]="productForm.invalid">Kaydet</button>
     </form>
+</div>
 
-    <div class="product-list">
+<div class="product-list">
+    <h2>Ürünler</h2>
+    <div class="products">
         <div class="product-card" *ngFor="let product of products">
-            <h3>{{ product.name }}</h3>
-            <p>Kategori: Kategori Adı</p>
-            <p>Marka: Marka Adı</p>
-            <p>Fiyat: {{ product.unitPrice | currency:'TRY' }}</p>
-            <p *ngIf="product.isInStock; else outOfStock">Stokta Var</p>
-            <ng-template #outOfStock>
-                <p>Stokta Yok</p>
-            </ng-template>
-
-            <div class="actions">
-                <button (click)="editProduct(product)">Güncelle</button>
-                <button class="danger" (click)="deleteProduct(product)">Sil</button>
+            <img src="https://picsum.photos/300/300" alt="{{ product.name }}" />
+            <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p><strong>Marka:</strong> Marka Adı</p>
+                <p><strong>Kategori:</strong> Kategori Adı</p>
+                <p><strong>Fiyat:</strong> ₺{{ product.unitPrice }}</p>
+                <p><strong>Stok:</strong> {{ product.isInStock ? 'Var' : 'Yok' }}</p>
+                <p class="desc">{{ product.description }}</p>
+                <div class="actions">
+                    <button class="update">Güncelle</button>
+                    <button class="delete">Sil</button>
+                </div>
             </div>
         </div>
     </div>

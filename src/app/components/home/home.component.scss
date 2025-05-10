@@ -12,12 +12,12 @@
     gap: 2rem;
     align-items: flex-start;
   
-    // Kategori bileşeni için sabit genişlik ver
+    
     app-category {
       flex: 0 0 200px;
     }
   
-    // Ürünleri saran <app-product> için geniş alan bırak
+    
     app-product {
       flex: 1;
       display: flex;
@@ -101,3 +101,86 @@
     justify-content: space-between;
   }
 }
+
+/*
+
+.home {
+  .hero {
+    text-align: center;
+    background-color: var(--card-bg);
+    padding: 3rem 1rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #ccc;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--accent-color);
+      border: none;
+      color: white;
+      border-radius: 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ffa726;
+      }
+    }
+  }
+
+  .features {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    .feature-card {
+      flex: 1 1 30%;
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      text-align: center;
+
+      h3 {
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        color: #bbb;
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .features {
+      flex-direction: column;
+
+      .feature-card {
+        flex: 1 1 100%;
+      }
+    }
+
+    .hero {
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+*/

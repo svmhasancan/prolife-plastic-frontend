@@ -1,4 +1,4 @@
-<div class="navbar">
+<!-- <div class="navbar">
   <div class="navbar-left">
     <div class="logo">Prolife</div>
   </div>
@@ -29,4 +29,43 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<nav class="navbar">
+  <div class="navbar-left">
+    <span class="brand">Prolife Plastik</span>
+  </div>
+
+  <div class="navbar-center">
+    <ul class="nav-links">
+      <li><a href="#">Anasayfa</a></li>
+      <li><a href="#">Ürünler</a></li>
+    </ul>
+  </div>
+
+  <div class="navbar-right">
+    <button class="icon-button">
+      <i class="fa-solid fa-cart-shopping"></i>
+    </button>
+
+    <!-- Kullanıcı giriş yaptıysa: -->
+    <div class="user-dropdown">
+      <img src="assets/images/default-user.png" alt="Profil" class="profile-pic" (click)="toggleDropdown()" />
+      <ul class="dropdown-menu" [class.active]="dropdownOpen">
+        <li><a href="#">Profilim</a></li>
+        <li><a href="#">Siparişlerim</a></li>
+        <li><a href="#">Çıkış Yap</a></li>
+      </ul>
+    </div>
+
+    <!-- Giriş yapılmamışsa -->
+    <ng-container *ngIf="!isLoggedIn">
+      <button class="auth-button login">Giriş Yap</button>
+      <button class="auth-button register">Üye Ol</button>
+    </ng-container>
+  </div>
+
+  <button class="menu-toggle" (click)="toggleMenu()">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</nav>

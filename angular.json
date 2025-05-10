@@ -19,7 +19,7 @@
           "options": {
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/assets/styles"
+                "src/styles"
               ]
             },
             "outputPath": "dist/prolife-plastic-frontend",

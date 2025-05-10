@@ -1,0 +1,22 @@
+<div class="admin-layout">
+    <aside class="sidebar" [class.open]="sidebarOpen">
+        <h3>Prolife Admin</h3>
+        <nav>
+            <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+            <a routerLink="products" routerLinkActive="active">Ürün Yönetimi</a>
+            <a routerLink="categories" routerLinkActive="active">Kategori Yönetimi</a>
+            <a routerLink="brands" routerLinkActive="active">Marka Yönetimi</a>
+            <a routerLink="users" routerLinkActive="active">Kullanıcı Yönetimi</a>
+        </nav>
+    </aside>
+
+    <main>
+        <header>
+            <button class="menu-toggle" (click)="sidebarOpen = !sidebarOpen">☰</button>
+            <span>Yönetim Paneli</span>
+        </header>
+        <section class="content">
+            <router-outlet></router-outlet>
+        </section>
+    </main>
+</div>
