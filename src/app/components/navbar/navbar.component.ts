@@ -11,7 +11,7 @@ import { CartService } from 'src/app/service/cart.service';
 export class NavbarComponent implements OnInit {
   isCartOpen = false;
 
-  menuActive = false;
+  menuOpen = false;
   dropdownOpen = false;
   isLoggedIn = true; // Bunu giriş durumuna göre ayarlarsın
 
@@ -52,4 +52,6 @@ export class NavbarComponent implements OnInit {
   routeToCart() {
     this.route.navigate(['cart']);
   }
+
+  logout() {}
 }

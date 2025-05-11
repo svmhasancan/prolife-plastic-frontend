@@ -5,6 +5,7 @@ import { CartService } from 'src/app/service/cart.service';
 
 import { Notyf } from 'notyf';
 import { ActivatedRoute } from '@angular/router';
+import { ProductDetailDto } from 'src/app/models/product-detail-dto';
 
 @Component({
   selector: 'app-product',
@@ -12,8 +13,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  products: Product[];
+  products: ProductDetailDto[];
   searchQuery: string = '';
+  imageBasePath: string = 'https://localhost:44397/uploads/images/';
 
   private notyf = new Notyf();
 
@@ -24,38 +26,45 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((params) => {
-      const categoryId = params.get('categoryId');
-
-      if (categoryId) {
-        this.getProductsByCategoryId(categoryId.toString());
-      } else {
-        this.getProducts();
-      }
-    });
+    this.getProducts();
+    // this.activatedRoute.paramMap.subscribe((params) => {
+    //   const categoryId = params.get('categoryId');
+    //   if (categoryId) {
+    //     this.getProductsByCategoryId(categoryId.toString());
+    //   } else {
+    //     this.getProducts();
+    //   }
+    // });
   }
 
   getProducts(): void {
-    this.productService.getAll().subscribe((response) => {
+    this.productService.getProductsByDetail().subscribe((response) => {
       this.products = response.data;
     });
   }
 
-  getProductsByCategoryId(categoryId: string): void {
-    this.productService.getByCategoryId(categoryId).subscribe((response) => {
-      this.products = response.data;
-    });
-  }
+  // getProductsByCategoryId(categoryId: string): void {
+  //   this.productService.getByCategoryId(categoryId).subscribe((response) => {
+  //     this.products = response.data;
+  //   });
+  // }
 
-  filteredProducts() {
+  filteredProducts(): ProductDetailDto[] {
     if (!this.searchQuery) return this.products;
     return this.products.filter((product) =>
-      product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      product.productName.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
 
-  addToCart(product: Product) {
-    this.cartService.addToCart(product);
-    this.notyf.success('Ürün Sepete Eklendi');
+  getImageUrl(product: ProductDetailDto): string {
+    if (product.productImages && product.productImages.length > 0) {
+      return this.imageBasePath + product.productImages[0];
+    }
+    return 'assets/default-image.png';
   }
+
+  // addToCart(product: ProductDetailDto) {
+  //   this.cartService.addToCart(product.);
+  //   this.notyf.success('Ürün Sepete Eklendi');
+  // }
 }

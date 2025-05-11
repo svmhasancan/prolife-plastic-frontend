@@ -7,18 +7,17 @@ const routes: Routes = [
     path: '',
     component: AdminLayoutComponent,
     children: [
-      // örnek child rotalar:
       {
         path: 'dashboard',
         loadComponent: () =>
-          import('../components/dashboard/dashboard.component').then(
+          import('../layouts/dashboard/dashboard.component').then(
             (m) => m.DashboardComponent
           ),
       },
       {
         path: 'products',
         loadComponent: () =>
-          import('../components/product-crud/product-crud.component').then(
+          import('../layouts/product-crud/product-crud.component').then(
             (m) => m.ProductCrudComponent
           ),
       },

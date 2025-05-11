@@ -1,19 +1,20 @@
-<!-- <div class="navbar">
+<nav class="navbar">
   <div class="navbar-left">
-    <div class="logo">Prolife</div>
+    <span class="brand">Prolife Plastik</span>
   </div>
 
-  <div class="navbar-center">
-    <a routerLink="/about" class="nav-link">Hakkımızda</a>
-    <a routerLink="/contact" class="nav-link">İletişim</a>
+  <div class="navbar-center" [class.active]="menuOpen">
+    <ul class="nav-links">
+      <li><a routerLink="/">Anasayfa</a></li>
+      <li><a routerLink="/products">Ürünler</a></li>
+      <li><a routerLink="/about">Hakkımızda</a></li>
+      <li><a routerLink="/contact">İletişim</a></li>
+    </ul>
   </div>
 
   <div class="navbar-right">
-    <a routerLink="/register" class="auth-btn">Üye Ol</a>
-    <a routerLink="/login" class="auth-btn">Giriş Yap</a>
-
-    <div class="cart-btn" (click)="toggleCartDropdown()">
-      <i class="fas fa-shopping-cart"></i>
+    <div class="cart-wrapper" (click)="toggleCartDropdown()">
+      <i class="fa-solid fa-cart-shopping"></i>
       <span *ngIf="cartItems.length > 0" class="cart-count">{{ cartItems.length }}</span>
 
       <div class="cart-dropdown" *ngIf="isCartOpen">
@@ -23,49 +24,30 @@
           <button class="btn-remove-item" (click)="removeItem(item)">Sil</button>
         </div>
         <div class="cart-actions">
-          <button class="btn-clear-cart" (click)="clearCart()">Sepeti Temizle</button>
-          <button class="btn-checkout" (click)="routeToCart()">Sepete Git</button>
+          <button (click)="clearCart()">Sepeti Temizle</button>
+          <button (click)="routeToCart()">Sepete Git</button>
         </div>
       </div>
     </div>
-  </div>
-</div> -->
 
-<nav class="navbar">
-  <div class="navbar-left">
-    <span class="brand">Prolife Plastik</span>
-  </div>
-
-  <div class="navbar-center">
-    <ul class="nav-links">
-      <li><a href="#">Anasayfa</a></li>
-      <li><a href="#">Ürünler</a></li>
-    </ul>
-  </div>
-
-  <div class="navbar-right">
-    <button class="icon-button">
-      <i class="fa-solid fa-cart-shopping"></i>
-    </button>
-
-    <!-- Kullanıcı giriş yaptıysa: -->
-    <div class="user-dropdown">
-      <img src="assets/images/default-user.png" alt="Profil" class="profile-pic" (click)="toggleDropdown()" />
-      <ul class="dropdown-menu" [class.active]="dropdownOpen">
-        <li><a href="#">Profilim</a></li>
-        <li><a href="#">Siparişlerim</a></li>
-        <li><a href="#">Çıkış Yap</a></li>
-      </ul>
-    </div>
-
-    <!-- Giriş yapılmamışsa -->
-    <ng-container *ngIf="!isLoggedIn">
-      <button class="auth-button login">Giriş Yap</button>
-      <button class="auth-button register">Üye Ol</button>
+    <ng-container *ngIf="isLoggedIn; else guestLinks">
+      <div class="user-dropdown">
+        <img src="assets/images/default-user-image2.jpg" alt="Profil" (click)="toggleDropdown()" />
+        <ul [class.active]="dropdownOpen">
+          <li><a href="#">Profilim</a></li>
+          <li><a href="#">Siparişlerim</a></li>
+          <li><a href="#">Çıkış Yap</a></li>
+        </ul>
+      </div>
     </ng-container>
-  </div>
 
-  <button class="menu-toggle" (click)="toggleMenu()">
-    <i class="fa-solid fa-bars"></i>
-  </button>
+    <ng-template #guestLinks>
+      <button class="auth-btn login" routerLink="/login">Giriş Yap</button>
+      <button class="auth-btn register" routerLink="/register">Üye Ol</button>
+    </ng-template>
+
+    <button class="menu-toggle" (click)="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
 </nav>

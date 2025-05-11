@@ -4,11 +4,23 @@
 
 <div class="product-list">
     <div *ngFor="let product of filteredProducts()" class="product-card">
-        <img src="https://picsum.photos/300/300" alt="{{ product.name }}" />
+        <img [src]="getImageUrl(product)" />
+
         <div class="product-info">
-            <h3>{{ product.name }}</h3>
+            <h3>{{ product.productName }}</h3>
+            <p class="meta">
+                <span class="category">{{ product.categoryName }}</span> |
+                <span class="brand">{{ product.brandName }}</span>
+            </p>
+
+            <p class="stock-status" [ngClass]="{ 'in-stock': product.isInStock, 'out-of-stock': !product.isInStock }">
+                {{ product.isInStock ? 'Stokta' : 'Tükendi' }}
+            </p>
+
             <p class="price">{{ product.unitPrice | currency: 'TRY' }}</p>
-            <button (click)="addToCart(product)">
+            <p class="desc">{{ product.description }}</p>
+
+            <button [disabled]="!product.isInStock">
                 <i class="fas fa-cart-plus"></i> Sepete Ekle
             </button>
         </div>

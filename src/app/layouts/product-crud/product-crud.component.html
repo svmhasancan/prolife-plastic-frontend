@@ -1,0 +1,74 @@
+<div class="product-management">
+    <h2>Ürün Ekle / Güncelle</h2>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="product-form">
+            <div class="form-group">
+                <label for="name">Ürün Adı</label>
+                <input id="name" formControlName="name" type="text" placeholder="Ürün adı girin" />
+            </div>
+
+            <div class="form-group">
+                <label for="categoryId">Kategori</label>
+                <select id="categoryId" formControlName="categoryId">
+                    <option *ngFor="let category of categories">
+                        Kategori
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="brandId">Marka</label>
+                <select id="brandId" formControlName="brandId">
+                    <option *ngFor="let brand of brands">
+                        Marka
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="unitPrice">Fiyat</label>
+                <input id="unitPrice" formControlName="unitPrice" type="number" placeholder="₺" />
+            </div>
+
+            <div class="form-group">
+                <label for="isInStock">Stokta mı?</label>
+                <input id="isInStock" type="checkbox" formControlName="isInStock" />
+            </div>
+
+            <div class="form-group">
+                <label for="description">Açıklama</label>
+                <textarea id="description" formControlName="description" rows="4"
+                    placeholder="Ürün açıklaması yazın"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="productImage">Ürün Fotoğrafı</label>
+                <input id="productImage" type="file" (change)="onFileChange($event)" />
+            </div>
+
+            <button type="submit" [disabled]="productForm.invalid">Kaydet</button>
+        </div>
+    </form>
+</div>
+
+<div class="product-list">
+    <h2>Ürünler</h2>
+    <div class="products">
+        <div class="product-card" *ngFor="let product of products">
+            <img src="https://picsum.photos/300/300" alt="Ürün Adı" />
+            <div class="product-info">
+                <h3>Ürün Adı</h3>
+                <p><strong>Marka:</strong> Marka</p>
+                <p><strong>Kategori:</strong> Kategori</p>
+                <p><strong>Fiyat:</strong> 500₺</p>
+                <p><strong>Stok:</strong> product.isInStock ? 'Var' : 'Yok'</p>
+                <p class="desc">Açıklama</p>
+                <div class="actions">
+                    <button class="update">Güncelle</button>
+                    <button class="delete">Sil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

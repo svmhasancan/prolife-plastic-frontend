@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Product } from '../models/product';
 import { BaseService } from './base.service';
+import { ProductDetailDto } from '../models/product-detail-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -42,5 +43,10 @@ export class ProductService extends BaseService<Product> {
     return this.httpClient.delete<ListResponseModel<Product>>(url, {
       body: product,
     });
+  }
+
+  getProductsByDetail(): Observable<ListResponseModel<ProductDetailDto>> {
+    let url = 'https://localhost:44397/api/Products/getproductdetails';
+    return this.httpClient.get<ListResponseModel<ProductDetailDto>>(url);
   }
 }
