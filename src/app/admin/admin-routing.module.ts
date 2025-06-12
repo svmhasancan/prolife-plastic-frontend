@@ -21,6 +21,13 @@ const routes: Routes = [
             (m) => m.ProductCrudComponent
           ),
       },
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('../layouts/orders/orders.component').then(
+            (m) => m.OrdersComponent
+          ),
+      },
     ],
   },
 ];

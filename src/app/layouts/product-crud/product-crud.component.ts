@@ -6,6 +6,10 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BrandService } from 'src/app/service/brand.service';
+import { CategoryService } from 'src/app/service/category.service';
+import { ProductService } from 'src/app/service/product.service';
+import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-product-crud',
@@ -21,7 +25,12 @@ export class ProductCrudComponent implements OnInit {
   products = [];
   selectedFile: File | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private brandService: BrandService,
+    private categoryService: CategoryService,
+    private productService: ProductService
+  ) {}
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -32,16 +41,13 @@ export class ProductCrudComponent implements OnInit {
       isInStock: [false],
       description: ['', Validators.required],
     });
-
-    this.fetchCategories();
-    this.fetchBrands();
   }
 
-  fetchCategories() {
-    // Kategorileri veritabanından al
+  getCategories() {
+    this.categoryService.getAll().subscribe((response) => {});
   }
 
-  fetchBrands() {
+  getBrands() {
     // Markaları veritabanından al
   }
 

@@ -20,6 +20,7 @@ import { ProductCrudComponent } from './components/product-crud/product-crud.com
 import { UnauthorizedComponent } from './components/pages/unauthorized/unauthorized.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { OrdersComponent } from './layouts/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     UnauthorizedComponent,
     ProductCardComponent,
     DashboardComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,
